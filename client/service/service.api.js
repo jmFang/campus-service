@@ -1,0 +1,149 @@
+(function() {
+
+  var service = {};
+  const baseUrl = "https://www.sysuygm.cn";
+  // 中大学生邮箱的尾缀
+  const emailPostfix = "@mail2.sysu.edu.cn";
+  const userId = "12344"
+  /*发布商品
+  @param product 待发布的商品表单
+  @param filePaths 待传图片的本地路径
+  @param callback 回调函数
+  */
+  service.postProduct = function (productForm, filePaths, callback) {
+      return callback({
+          success: true
+      });
+    wx.uploadFile({
+      url: baseUrl + "/publish",
+      filePath: filePaths,
+      name:'......',
+      header: {
+        "Content-Type": "multipart/form-data",
+        'accept': 'application/json',
+        'Authorization': 'sysu ..'    //若有token，此处换上你的token，没有的话省略  
+      },
+      formData:productForm,
+      success:function(res) {
+        return callback({
+            success:true
+        });
+        console.log(JSON.stringify(res.data))  
+      },
+      fail:function(err) {
+        callback(err);
+      },
+      complete:function(res) {
+        console.log('complete postProduct');
+      }
+    })
+  }
+  /* 获取商品列表
+  @param which 按最新、最热，或者其他分类
+  @param callback 回调函数
+  */ 
+  service.getProducts = function (which, callback) {
+    wx.request({
+      url: baseUrl + "/api/products",
+      method:'GET',
+      success:function(res){
+        callback(res);
+        console.log("返回成功的数据:" + res.data) //返回的会是对象，可以用JSON转字符串打印出来方便查看数据    
+        console.log("返回成功的数据:" + JSON.stringify(res.data)) //这样就可以愉快的看到后台的数据啦 
+      },
+      fail:function(fail) {
+        callback(fail);
+      },
+      complete:function(res) {
+        callback(res);
+      }
+    })
+  }
+
+  service.getBaseUrl = function() {
+    return "https:www.sysuygm.cn";
+  }
+
+  /* 根据用户ID，获取用户资料
+  @param callback
+  */ 
+
+  service.getUserInfo = function(callback) {
+
+  }
+  /*
+  @param userInfo 新的用户信息
+  @param callback 回调函数
+  */ 
+  service.updateUserInfo = function(userInfo,callback) {
+
+  }
+  /* 根据用户ID，获取用户的收藏品列表
+  @param userId 用户ID
+  @param callback 回调函数
+  */ 
+  service.getCollections = function(callback) {
+
+  }
+  service.deleteCollection = function(productId, callback) {
+     return callback({
+        status:200,
+        success:true
+      });
+      wx.request({
+          url: baseUrl + "/api/users/:uid/collections/:cid",
+          method: 'POST',
+          data:{
+              uid:userId,
+              cid:productId
+          },
+          success: function (res) {
+              callback(res);
+              console.log("返回成功的数据:" + res.data)
+          },
+          fail: function (fail) {
+              callback(fail);
+          },
+          complete: function (res) {
+              callback(res);
+          }
+      })
+  }
+
+  /* 根据用户ID，获取用户发布过的商品列表
+  @param userId 用户ID
+  @param callback 回调函数
+  */
+  service.getPosts = function (callback) {
+
+  }
+  service.changePostStatus = function(pid,callback) {
+      return callback({
+          success:true,
+          status:200,
+          newInfo:{
+              id: pid+"n1",
+              name:'尚文'
+          }
+      });
+  }
+
+  /* 根据用户ID获取用户的消息
+  @param userId 用户ID
+  @param callback
+  */ 
+  service.getMessages = function(userId, callback) {
+
+  }
+  /* 邮箱验证
+  @param netId 用于组成邮箱号
+  @callback 回调函数
+  */ 
+  service.validateEmail = function(netId, callback) {
+
+  }
+
+
+  module.exports = service;
+
+})();

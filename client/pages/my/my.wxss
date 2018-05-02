@@ -1,0 +1,134 @@
+.container {
+  background-color: whitesmoke;
+}
+
+.up-part {
+  width: 90%;
+  border: 2rpx solid #ddd;
+  height: 280rpx;
+  margin: 0 auto;
+  margin-top: 80rpx;
+  border-radius: 5px;
+  box-shadow: 0 1rpx 1rpx 2rpx #ddd;
+  background-color: white;
+}
+.user-info {
+  height: 140rpx;
+  text-align: center;
+  margin-right: 4px;
+  margin-left: 4px;
+  border-bottom: 3rpx solid #ddf;
+}
+.avatar-box {
+  padding:8rpx;
+  width: 100rpx;
+  height: 100rpx;
+  border: 1rpx solid #ddd;
+  display: inline-block;
+  border-radius: 50%;
+  position: relative;
+  top: -45rpx;
+}
+.user-nickname {
+  display: block;
+  position: relative;
+  top: -45rpx;
+  font-size: 20rpx;
+}
+.user-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  background-color: #ddd;
+  border-radius: 50%;
+  margin: 0;
+  z-index: 11;
+}
+.user-data {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.user-data text {
+  display: block;
+}
+.user-data view {
+  width: 33%;
+  height: 140rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.left {
+  border-right: 2rpx solid #ddf;
+}
+.middle {
+    border-right: 2rpx solid #ddf;
+    border-left: 2rpx solid #ddf;
+}
+.right {
+    border-left: 2rpx solid #ddf;
+}
+.number {
+  font-size: 30rpx;
+  font-style: oblique;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+.tips {
+  font-size: 24rpx;
+  color: #555;
+  margin-top: 3rpx;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.down-part {
+  width: 90%;
+  border: 2rpx solid #ddd;
+  height: 600rpx;
+  margin: 0 auto;
+  margin-top: 30rpx;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+.item image{
+  width: 30rpx;
+  height: 30rpx;
+}
+.item text {
+  font-size: 24rpx;
+  color: grey;
+}
+.item {
+  display: flex;
+  flex-direction: row;
+  line-height: 80rpx;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+}
+.divide {
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #ddd;
+}
+.icon {
+  margin-right: 100rpx;
+  margin-left: 20rpx;
+}
+.right-side {
+  position: absolute;
+  right: 20rpx;
+}
+.no-under-border {
+   border-bottom:none;
+}
+.position {
+  position: absolute;
+  top: 50%;
+  bottom: 50%;
+  width: 100%;
+}

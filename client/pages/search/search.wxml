@@ -1,0 +1,53 @@
+<view class="page">
+    <view class="page__bd">
+        <view class="weui-search-bar">
+            <view class="weui-search-bar__form">
+                <view class="weui-search-bar__box">
+                    <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                    <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+
+                    <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                        <icon type="clear" size="14"></icon>
+                    </view>
+                </view>
+
+                <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                    <icon class="weui-icon-search" type="search" size="14"></icon>
+                    <view class="weui-search-bar__text">搜索</view>
+                </label>
+            </view>
+            <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="query">确定</view>
+        </view>
+    </view>
+
+  <!--商品列表  -->
+    <view class='products-list' wx:for='{{productsList}}' wx:key='id'>
+      <view class='product-item'>
+      <!--商品标题和价格  -->
+        <view class='product-head'>
+          <text class='product-title'>{{productsList[index].title}}</text>
+          <text class='product-price'>{{productsList[index].price}}</text>
+        </view>
+        <!--商品图片列表  -->
+        <view class='list-box'>
+          <view class='product-pictures' wx:for='{{productsList[index].pictures}}' wx:key='index' wx:for-index='index' wx:for-item='item'>
+              <image class='product-picture' src='{{item}}' style="border:{{item==''?'none':'1rpx solid #ddd'}}"></image>     
+          </view>      
+        </view>
+        <!--商品描述  -->
+        <view class='product-description'>
+          <text class='text-product-des'>{{productsList[index].description}}</text>
+        </view>
+        <!--用户信息  -->
+        <view class='user-info'>
+          <image class='user-avatar' src='{{productsList[index].userAvatarUrl}}'></image>
+          <view class='user-info-sub'>
+            <text class='user-nick'>{{productsList[index].userNickname}}</text>
+            <text class='user-verified'>{{productsList[index].userVerified}}</text>
+            <text class='user-address'>{{productsList[index].userAddress}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+</view>

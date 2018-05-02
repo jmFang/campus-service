@@ -1,0 +1,56 @@
+<view class='container'>
+    <view class='up-part'>
+        <view class='top-part-first-item'>
+            <text>头像</text>
+            <view>
+                <image src='{{userInfo.avatarUrl}}' class='avatar'></image>
+            </view>
+            <image class='icon' src='{{iconPath}}'></image>
+        </view>
+        <view class='up-part-item'>
+            <text>校区</text>
+            <text>{{userInfo.school}}</text>
+            <image class='icon' src='{{iconPath}}'></image>
+        </view>
+        <view class='up-part-item'>
+            <text>年级</text>
+            <text>{{userInfo.grade}}</text>
+            <image class='icon' src='{{iconPath}}'></image>
+        </view>
+        <view class='up-part-item'>
+            <text>院系</text>
+            <text>{{userInfo.college}}</text>
+            <image class='icon' src='{{iconPath}}'></image>
+        </view>     
+        <view class='up-part-item'>
+            <text>用户名</text>
+            <text>{{userInfo.nickName}}</text>
+            <image class='icon' src='{{iconPath}}'></image>
+        </view>       
+    </view>
+
+    <view class='down-part'>
+        <view class='down-part-item down-part-head'><text>联系方式</text></view>
+        <view class='down-part-item'>
+            <text>手机号</text>
+            <text>{{userInfo.phoneNumber}}</text>
+            <image></image>
+        </view>
+        <view class='down-part-item'>
+            <text>微信号</text>
+            <text>{{userInfo.wechat}}</text>
+            <image src='{{iconPath}}' class='icon'></image>
+        </view>
+        <view class='down-part-item'>
+            <text>QQ号</text>
+            <text>{{userInfo.qq}}</text>
+            <image src='{{iconPath}}' class='icon'></image>
+        </view>
+    </view>
+
+    <view class='bottom-part page'>
+        <view class='page_bd page_bd_spacing'>
+            <button class='weui-btn' type='primary'>保存修改</button>
+        </view>
+    </view>
+</view>

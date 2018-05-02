@@ -1,0 +1,60 @@
+<view class="container">
+    <view class='detail-head'>
+        <view class='head-right'>
+            <image></image>
+            <text>举报</text>
+        </view>
+    </view>
+    <view class='user-info'>
+        <view>
+            <image src='{{product.publisher.avatarUrl}}' class='user-avatar'></image>
+        </view>
+        <view class='user-info-right'>
+            <view> 
+                <text class='nick-text'>{{product.publisher.nickname}}</text>   
+                <text class='verify-text'>{{product.publisher.verified?"已认证":"未认证"}}</text>      
+            </view>
+            <view><text>{{product.publisher.address}}</text></view>
+            <view><text>在甘木市场卖出{{product.publisher.selledNums}}件物品</text></view>
+        </view>
+    </view>
+    <view class='detail-content'>
+        <view class='content-head'>
+            <view class='head-top'>
+                <view class='product-title'>我有 <text>{{product.title}}</text></view>
+                <view class='head-text-wrapper'>
+                    <text class='head-text'>￥{{product.sellPrice}}</text>
+                    <text  class='head-text' style='text-decoration:line-through'>￥{{product.originPrice}}</text>
+                </view>         
+            </view>
+
+            <view>
+                <text class='des-text'>{{product.description}}</text>
+            </view>
+            <view class='text-color'>
+                <view>浏览量{{product.visit}}</view>
+                <view>{{product.createTime}}</view>
+            </view>
+        </view>
+
+        <view class='content-more'>
+            <view class='content-more-head'>更多细节</view>
+            <view class='content-more-body' wx:for="{{product.photos}}" wx:for-item="url" wx:key="*this">
+                <image src='{{url}}'></image>
+            </view>
+        </view>
+    </view>
+
+    <view class='content-commit'>
+        <view class='text-color head-size'>评论</view>
+        <view wx:for="{{product.commits}}" wx:key="*this" wx:for-item="commit" style='display:{{product.commits.length==0?"none":"block"}}' class='commit'>
+            <view>{{commit}}</view>
+        </view>
+        <view class='text-color head-size' style='display:{{product.commits.length>0?"none":"block"}};text-align:center;'>暂时还没有人评论哦</view>
+    </view>
+    <view class='detail-footer'>
+        <view><image></image>收藏</view>
+        <view> <image></image>留言</view>
+        <view> <image></image>联系卖家</view>
+    </view>
+</view>

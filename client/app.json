@@ -1,0 +1,50 @@
+{
+  "pages": [
+        "pages/start/start",
+    "pages/details/details",
+    "pages/my/my",
+    "pages/list/list",
+    "pages/publish/publish",
+    "pages/index/index",
+    "pages/search/search",
+    "pages/userInfo/userInfo",
+    "pages/post/post", 
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "#212121",
+    "navigationBarBackgroundColor": "#8BC34A",
+    "navigationBarTitleText": "华软线购",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar":{
+    "color":"#9BABBA",
+    "selectedColor":"#495056",
+    "borderStyle":"white",
+    "backgroundColor":"#ffffff",
+    "list":[
+      {
+        "pagePath":"pages/index/index",
+        "text":"首页",
+        "iconPath":"static/images/tar-home.png",
+        "selectedIconPath":"static/images/tar-home-on.png"
+      },
+      {
+        "pagePath":"pages/post/post",
+        "text":"发布",
+        "iconPath":"static/images/plus64_normal.png",
+        "selectedIconPath":"static/images/plus64.png"
+      },
+      {
+        "pagePath":"pages/my/my",
+        "text":"我的",
+        "iconPath":"static/images/tar-topic.png",
+        "selectedIconPath":"static/images/tar-topic-on.png"
+      }
+    ]
+  },
+  "networkTimeout":{
+    "request":10000,
+    "downloadFile":10000
+  }
+}

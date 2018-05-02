@@ -1,0 +1,74 @@
+<view class='container' style='display: {{display}};'>
+  <view class='up-part'>
+    <view class='user-info'>
+      <view class='avatar-box'>
+            <image class='user-avatar' src='{{userInfo.avatarUrl}}'></image>
+      </view>
+      <text class='user-nickname'>{{userInfo.nickName}} </text>
+    </view>
+
+    <view class='user-data'>
+      <view class='left' bindtap='goToList' data-which='msg'>
+        <text class='number'>{{unreaded}}</text>
+        <text class='tips'>未读消息</text>
+      </view>
+
+      <view class='middle' bindtap='goToList' data-which='post'>
+        <text class='number'>{{myposted}}</text>
+        <text class='tips'>我发布的</text>
+      </view>
+
+      <view class='right' bindtap='goToList' data-which='clt'>
+        <text class='number'>{{mycollected}}</text>
+        <text class='tips'>我收藏的</text>
+      </view>
+    </view>
+  </view>
+
+  <view class='down-part'>
+  <view class='divide'>
+    <view class='item' bindtap='clickItem' id='userInfo'>
+      <image src='../../static/images/icon/times.png' class='icon'></image>
+      <text>个人信息</text>
+      <image src='../../static/images/more/enter.png' class='right-side'></image>
+    </view>
+    <view class='item' bindtap='clickItem' id='eMail'>
+      <image src='../../static/images/icon/times.png' class='icon'></image>
+      <text>邮箱认证</text>
+      <image src='../../static/images/more/enter.png' class='right-side'></image>
+    </view>
+    <view class='item' bindtap='clickItem' id='realName'>
+      <image src='../../static/images/icon/times.png' class='icon'></image>
+      <text>实名认证</text>
+      <image src='../../static/images/more/enter.png' class='right-side'></image>
+    </view>
+  </view>
+
+  <view class='divide no-under-border'>
+    <view class='item' bindtap='clickItem' id='settings'>
+      <image src='../../static/images/icon/times.png' class='icon'></image>
+      <text>设置</text>
+      <image src='../../static/images/more/enter.png' class='right-side'></image>
+    </view>
+    <view class='item' bindtap='clickItem' id='help'>
+      <image src='../../static/images/icon/times.png' class='icon'></image>
+      <text>帮助</text>
+      <image src='../../static/images/more/enter.png' class='right-side'></image>
+    </view>
+    <view class='item' bindtap='clickItem' id='aboutUs'>
+      <image src='../../static/images/icon/times.png' class='icon'></image>
+      <text>关于</text>
+      <image src='../../static/images/more/enter.png' class='right-side'></image>
+    </view>
+  </view>
+  </view>
+</view>
+
+<view class="page position" style='visibility: {{hidden}};'>
+    <view class="page__bd">
+        <view class="weui-loadmore">
+            <view class="weui-loading"></view>
+            <view class="weui-loadmore__tips">正在加载</view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,42 @@
+<view class='container'>
+  <view class='top-img'>
+    <image src='../../static/images/seekbar/slide1.png'></image>
+  </view>
+  <view class='content'>
+    <view class='content-top'>
+      <view class='top' data-which='t1' bindtap='goToPost'>
+          <image src='../../static/images/book.png' class='first'></image>
+          <text>教材书籍</text>  
+        </view>
+       <view class='top' data-which='t2' bindtap='goToPost'>
+        <image src='../../static/images/digital.png' class='second'></image>
+        <text>数码家电</text>
+      </view>
+      <view class='top' data-which='t3' bindtap='goToPost'>
+        <image src='../../static/images/tennis.png' class='third'></image>
+        <text>文化体育</text>
+      </view>           
+    </view>
+
+    <view class='content-bottom'>
+      <view class='top' data-which='t4' bindtap='goToPost'>
+        <view>
+            <image src='../../static/images/cosmetic.png' class='first'></image>
+            <text>日化服饰</text>   
+        </view>
+      </view>
+       <view class='top' data-which='t5' bindtap='goToPost'>
+        <image src='../../static/images/tools.png' class='second'></image>
+        <text>技能服务</text>
+      </view>
+      <view class='top' data-which='t6' bindtap='goToPost'>
+        <image src='../../static/images/handshake.png' class='third'></image>
+        <text>求购求伴</text>
+      </view>           
+    </view>    
+  </view>
+
+  <view class='footer'>
+    <text>@ ganmu</text>
+  </view>
+</view>

@@ -1,0 +1,6 @@
+{
+	"appid": "wx11b005672c39c105",
+	"projectname": "huaruan-online",
+    "qcloudRoot":"./server",
+    "client":"./client"
+}

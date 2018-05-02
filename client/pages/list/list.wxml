@@ -1,0 +1,29 @@
+<view class='container'>
+    <view class='list-content' style='display:{{msg?"none":"block"}};' wx:for="{{productList}}" wx:key="{{index}}" wx:for-item="product">
+        <view class='list-item'>
+            <view class='item-left-box'><image src='{{product.photoUrl}}'></image></view>
+            <view class='item-mid-box'>
+                <text>{{product.title}}</text>
+                <text>￥{{product.sellPrice}}</text>
+                <text style='visibility:{{clt?"visible":"hidden"}};'>{{product.createTime}}发布</text>           
+                <text style='visibility:{{post?"visible":"hidden"}};'>还有{{product.timeLeft}}天下架</text>
+            </view>
+
+            <view class='item-right-box'>
+                <view>
+                <text style='display:{{clt && product.status==false?"none":"block"}};'> {{ post? (product.status==true?"已上架":"已下架"):(product.status?"在架上":"") }}</text></view>
+                <view>
+                <button style='visibility:{{product.status==true? "visible":"hidden"}}; display:{{clt?"none":"block"}}' bindtap='updatePost' data-id='{{product.id}}'  data-index="{{index}}">修改</button>
+                <text style='display:{{clt?"block":"none"}}' bindtap='deleteCollection'  data-index="{{index}}" data-id='{{product.id}}'>删除</text>
+                </view>
+                <view><button style='visibility:{{post?"visible":"hidden"}};' data-index="{{index}}" data-id='{{product.id}}' bindtap='changeStatus'>{{product.status==true?"下架":"上架"}}</button></view>
+            </view>
+        </view>
+    </view>
+
+    <view class='message-content' style='display:{{msg?"block":"none"}};'>
+        <view class='message-item'>
+            <view>第一条消息</view>
+        </view>
+    </view>
+</view>

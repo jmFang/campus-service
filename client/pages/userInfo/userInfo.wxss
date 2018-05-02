@@ -1,0 +1,124 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: whitesmoke;
+}
+
+.up-part {
+    width: 100%;
+    flex: 7;
+    padding-top: 20rpx;
+    background-color: white;
+    margin-bottom: 30rpx;
+    border-bottom: 1rpx solid #B7B2B8;
+    box-shadow: 0 5rpx 5rpx #C9C9C9;
+    border-radius: 0 0 20rpx 20rpx;
+}
+.down-part {
+    width: 100%;
+    flex: 2;
+    background-color: white;
+    border: 1rpx 2rpx solid #B7B2B8;
+    border-bottom: 2rpx solid #B7B2B8;
+    box-shadow: 0 5rpx 5rpx #C9C9C9;
+    border-radius: 8rpx;
+}
+.up-part-item {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.bottom-part {
+    width: 100%;
+    flex: 1;
+    margin-top: 60rpx;
+}
+.icon {
+    width: 30rpx;
+    height: 30rpx;
+}
+.down-part-item {
+    height: 80rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+}
+.up-part-item {
+    height: 80rpx;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around; 
+}
+.down-part-head {
+    margin-top: 30rpx;
+}
+.down-part-item > text:first-child {
+    font-size:14px;
+    flex: 1;
+    color: black;
+    text-align: center;
+}
+.down-part-item > text:nth-child(2) {
+    color: #B7B2B8;
+    flex: 3;
+    padding-left: 80rpx;
+    margin-left: 30rpx;
+}
+.down-part-item > image:nth-child(3) {
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 30rpx;
+}
+.up-part-item > text:first-child {
+    font-size:14px;
+    flex: 1;
+    color: black;
+    text-align: center;
+}
+
+.up-part-item > text:nth-child(2) {
+    color: #B7B2B8;
+    flex: 3;
+    padding-left: 80rpx;
+    margin-left: 30rpx;
+}
+.up-part-item > image:nth-child(3) {
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 30rpx;
+}
+.top-part-first-item {
+    height: 200rpx;
+    margin-right: 30rpx;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around; 
+    margin-bottom: 20rpx;
+}
+.top-part-first-item > text:first-child {
+    font-size:14px;
+    flex: 1;
+    color: black;
+    text-align: center;
+}
+.top-part-first-item > view:nth-child(2) {
+    display: inline-block;
+    flex: 3;
+    padding-left: 80rpx;
+    margin-left: 30rpx;
+}
+.top-part-first-item > image:nth-child(3) {
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 30rpx; 
+}
+.avatar {
+    width: 160rpx;
+    height: 160rpx;  
+    border-radius: 50%;
+}

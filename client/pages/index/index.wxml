@@ -1,0 +1,116 @@
+<!--index.wxml-->
+<scroll-view bindscroll='' scroll-y scroll-top="{{scrollTop}}" style='height:100%; display: {{display}};'>
+  <view class='search'>
+
+    <view bindtap='lookMessage' class='message-icon'>
+      <image src='../../static/images/ic_jwc.png'></image>
+    </view>
+
+    <view class="search-wrapper}">
+      <view class='search-button' bindtap='click_search'>
+        <view>四六级英语</view>
+      </view>
+    </view>
+
+    <view bindtap='look_more' class='text-look-more'>
+      <text>更多 </text>
+    </view>
+
+  </view>
+
+  <view class='swiper-wrapper'>
+    <swiper class='index-swiper' indicator-dots='true' autoplay='true' 
+    interval='2000' duration='1000'>
+    <block wx:for='{{slides}}'  wx:key='index'>
+      <swiper-item>
+        <image src='{{item.imgUrl}}' class='slide-image' bindtap='slideDetails' data-name='{{item.name}}'></image>
+      </swiper-item>
+    </block>
+    </swiper>  
+  </view>
+
+  <view class='product-filter'>
+    <view class='left' bindtap="filter" data-method='new'>
+      <text>最新</text>
+    </view>
+    <view class='middle' bindtap="filter" data-method='popular'>
+      <text>最热</text>
+    </view>
+
+    <view class='right' bindtap="filter" data-method='filter'>
+      <view>
+        <text class='text-filter'>筛选</text>
+        <image class='filter-icon' src='../../static/images/map5.png'></image>
+      </view>
+    </view>
+  </view>
+  <!--商品列表  -->
+  <view class='products-list' wx:for='{{productsList}}' wx:key='id'>
+    <view class='product-item' bindtap='goToDetails' data-index='{{index}}'>
+    <!--商品标题和价格  -->
+      <view class='product-head'>
+        <text class='product-title'>{{productsList[index].title}}</text>
+        <text class='product-price'>{{productsList[index].price}}</text>
+      </view>
+      <!--商品图片列表  -->
+      <view class='list-box'>
+        <view class='product-pictures' wx:for='{{productsList[index].pictures}}' wx:key='index' wx:for-index='index' wx:for-item='item'>
+            <image class='product-picture' src='{{item}}' style="border:{{item==''?'none':'1rpx solid #ddd'}}"></image>     
+        </view>      
+      </view>
+      <!--商品描述  -->
+      <view class='product-description'>
+        <text class='text-product-des'>{{productsList[index].description}}</text>
+      </view>
+      <!--用户信息  -->
+      <view class='user-info'>
+        <image class='user-avatar' src='{{productsList[index].userAvatarUrl}}'></image>
+        <view class='user-info-sub'>
+          <text class='user-nick'>{{productsList[index].userNickname}}</text>
+          <text class='user-verified'>{{productsList[index].userVerified}}</text>
+          <text class='user-address'>{{productsList[index].userAddress}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!--侧滑栏-分类筛选  -->
+  <view class='side-bar' style='{{sidebarStyle}}'>
+    <view class='side-bar-top'>
+      <view  class='side-bar-title'><span>类别</span></view>
+      <view class='side-bar-radios'>
+        <radio-group class='radio-group' bindchange='radioChange'>
+          <label class='radio' wx:for='{{radios}}' wx:key='id'>
+            <radio checked='{{item.checked}}'>{{item.value}}</radio>
+          </label>
+        </radio-group>
+      </view>
+    </view>
+    <view class='side-bar-middle'>
+      <text>分类</text>
+    </view>
+    <view class='side-bar-bottom'>
+          <view class='side-bar-buttons'>
+            <view bindtap='confirm' data-type='A' class='btn' style='{{btnSelected1}}'>确认</view>
+            <view bindtap='confirm' data-type='C' class='btn' style='{{btnSelected2}}'>取消</view>
+          </view>
+    </view>
+  </view>
+
+<view class="page">
+    <view class="page__bd">
+        <view class="weui-loadmore weui-loadmore_line">
+            <view class="weui-loadmore__tips weui-loadmore__tips_in-line">已经到底啦~</view>
+        </view>
+    </view>
+</view>
+</scroll-view>
+
+<view class="page position" style='visibility: {{hidden}};'>
+    <view class="page__bd">
+        <view class="weui-loadmore">
+            <view class="weui-loading"></view>
+            <view class="weui-loadmore__tips">正在加载</view>
+        </view>
+    </view>
+</view>

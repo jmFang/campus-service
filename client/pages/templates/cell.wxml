@@ -1,0 +1,7 @@
+<template name='cell'>
+  <view class='pages-item' style='height:{{cellHeight}}'>
+    <view class="{{text==null||text.length==0?'pages-icon-wrapper-no-bg':'pages-icon-wrapper'}}">
+      <image src='{{icon}}' class='pages-icon' style='scaleFill'></image>
+    </view>
+  </view>
+</template>

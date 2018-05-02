@@ -1,0 +1,85 @@
+<!--pages/publish/publish.wxml-->
+<scroll-view class='height:100%;' scroll-y>
+<form bindsubmit='commitPost'>
+<view class='container'>
+  <view class='post-title'>
+    <view class='text-title'>我有：</view>
+    <input class='input-title' type='text' placeholder='期末备考秘籍' placeholder-class='input'maxlength='60' required name='title'></input>
+  </view>
+
+  <view class='post-description'>
+  <!--product's description  -->
+    <view class='des-content'>
+        <textarea class='weui-textarea input-des' placeholder='秘籍在手，考试无忧' type='text' maxlength='{{noteMaxLen}}' name='description' bindinput='bindTextAreaChange'></textarea>
+        <view class='count-number'>{{noteNowLen}}/{{notemaxLen}}</view>
+    </view>
+    <!--product's photo uploader  -->
+    <view>
+      <view class="page">
+        <view class="page__bd">
+            <view class="weui-cells">
+                <view class="weui-cell">
+                    <view class="weui-cell__bd">
+                        <view class="weui-uploader">
+                            <view class="weui-uploader__hd">
+                                <view class="weui-uploader__info">{{photoNums}}/9</view>
+                            </view>
+                            <view class="weui-uploader__bd">
+                                <view class="weui-uploader__files" id="uploaderFiles">
+                                    <block wx:for="{{files}}" wx:key="*this">
+                                        <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                                            <image class="weui-uploader__img" src="{{item}}" mode="aspectFill"/>
+                                        </view>
+                                    </block>
+                                </view>
+                                <view class="weui-uploader__input-box">
+                                    <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+      </view>
+    <!--end of uploader  -->
+    </view>
+  <!--end of descrition part  -->
+  </view>   
+  <!--start of price part  -->
+  <view class='price-introduction'>
+    <view class='type-of-price'>
+      <view class='title-price-type {{pressed1?"pressed":""}}' bindtap='priceType'>开个价</view>
+      <view class='divide-line'></view>
+      <view class='title-price-type {{pressed2?"pressed":""}}'  bindtap='priceType'>免费送</view>
+    </view>
+    <!--price input  part-->
+    <view class='price-input'>
+      <view class='horizontal-box'>
+        <text style='display:{{pressed2?"none":"inline-block"}}'>售价: </text>
+        <input type='number' class='input-price' placeholder='{{pressed1?"输入商品价格":"我随便送"}}' name='sellingPrice'></input>
+      </view>
+      <view class='horizontal-box'>
+        <text>原价: </text>
+        <input type='number' class='input-price' placeholder='（选填）输入商品原价，买家更放心哦~' name='originPrice'></input>
+      </view>    
+    </view>
+  </view>
+  <!--down chief  -->
+  <view class='down-chief-part'>
+      <view class='horizontal-box'>
+        <text class='down-chief-text'>自动下架期限：</text>
+        <picker value="{{index}}" range="{{array}}"  bindchange="bindPickerChange" class='down-chief-picker'>
+            <view class='down-chief-input' name='limitTime' bindchange="bindPickerChange">{{value}}
+             <image class="arrow-r" src="../../static/images/arrow-r-0.png"></image></view>
+        </picker>
+      </view>   
+  </view>
+  <view class="post-btn">
+    <button type='primary' class='weui-btn' form-type='submit'>发布</button>
+  </view>
+
+<!--end of container  -->
+</view>
+</form>
+</scroll-view>

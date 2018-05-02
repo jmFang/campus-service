@@ -1,0 +1,119 @@
+.searchbar-result{
+    margin-top: 0;
+    font-size: 14px;
+}
+.searchbar-result:before{
+    display: none;
+}
+.weui-cell{
+    padding: 12px 15px 12px 35px;
+}
+.page {
+  background-color: #BDBDBD;
+}
+.weui-search-bar {
+  box-shadow: 0 3px 3px #ddd;
+}
+.products-list {
+  background:#FFFFFF;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  box-shadow:0 3px 3px #ddd;
+  margin-bottom: 20rpx;
+  border-radius: 5rpx;
+}
+
+.products-list .product-item {
+  padding: 5rpx;
+  width: 100%;
+}
+.products-list .product-item .product-head {
+  height: 55rpx;
+  font-size: 14px;
+  padding-top: 25rpx;
+  padding-left: 20rpx;
+  padding-right: 15rpx;
+}
+.product-head .product-title {
+  font-size: 14px;
+  float: left;
+  line-height: 40rpx;
+  text-align: center;
+  align-content: center;
+  color: #0d0d0d;
+}
+.product-head  .product-price {
+  font-size: 14px;
+  float: right;
+  color: red;
+}
+.list-box {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-bottom: 15rpx;
+}
+.product-pictures {
+  padding-top:15rpx; 
+  display: inline-flex;
+}
+.product-pictures image {
+  /* border: 1rpx solid #ddd; */
+  margin: 0 5rpx 0 5rpx;
+  height: 100px;
+  width: 100px;
+  display: inline-block;
+  border-radius: 8px;
+}
+
+.product-description {
+  vertical-align: middle;
+}
+.product-description {
+  padding:15rpx;
+}
+.product-description text {
+  font-size: 24rpx;
+  display: -webkit-box;
+  color: #757575;
+  height: 105rpx;
+  line-height: 35rpx;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.product-item .user-info {
+  border-top: 2rpx solid #ddd;
+  padding: 15rpx;
+  position: relative;
+}
+.user-info .user-avatar{
+  width:70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+}
+.user-info .user-info-sub{
+  display: inline-block;
+}
+
+.user-info-sub .user-nick {
+  font-size: 24rpx;
+  color: gray;
+  margin-right: 10px;
+  height: 20rpx;
+  margin-left: 20rpx;
+  position: relative;
+}
+.user-info-sub .user-verified {
+  font-size: 12px;
+  position: relative;
+  height: 20rpx;
+}
+.user-info-sub .user-address {
+  font-size: 20rpx;
+  display: block;
+  margin-left: 20rpx;
+}
