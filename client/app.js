@@ -6,9 +6,6 @@ const _utils = require("./utils/util.js");
 // 后台服务API对象
 var service = require('./service/service.api.js');
 
-
-//App id and RESTful ID
-Bmob.initialize("6629633f78a72ce63cbc44f5b515460f","5d5ada11a62e8e0d001ac314f6ac786c");
 App({
   version:"v1.0.0", //本项目的版本号
   onLaunch: function () {
@@ -17,7 +14,7 @@ App({
     wx.getSystemInfo({
       success: function(res) {
         var kScreenW = res.windowWidth / 375;
-        var kScreenH = res.windowHeight / 603;
+        var kScreenH = res.windowHeight / 667;
         wx.setStorageSync("kScreenW", kScreenW);
         wx.setStorageSync("kScreenH", kScreenH);
       },
@@ -25,104 +22,36 @@ App({
 
     // 调用系统API从本地缓存中获取数据
     try {
-      var value = wx.getStorageSync("user_openid");
+      var value = wx.getStorageSync("session_id");
       if(value) {
-
+        console.log("session_id",value)
       } else {
-        console.log("执行login1");
         wx.login({
           success:function(res) {
             if(res.code) {
-              console.log("执行log2",res);
-            }
-          }
-        });
-        wx.login({
-          success:function(res) {
-            if(res.code) {
-              // 获取bmob 的 openId
-              Bmob.User.requestOpenId(res.code, {
-                // 回调成功
-                success:function(userData) { 
-                  wx.getUserInfo({
-                    success:function(result) {
-                      // 用户信息
-                      var userInfo = result.userInfo;
-                      var nickName = userInfo.nickName;
-                      var avatarUrl = userInfo.avatarUrl;
-                      var sex = userInfo.gender;
+              console.log("res.code",res.code)
+              wx.request({
+                  url: 'https://nermpswq.qcloud.la/login',
+                  data:{
+                      code:res.code
+                  },
+                  method:"GET",
+                  success:function(res) {
+                      console.log(res)
+                      var session_data = res.data.session_data;
+                      var session_id = session_data.session_id;
+                      var expires = session_data.expires;
+                      var data = session_data.data;
+                      wx.setStorageSync('session_id', session_id)
+                  }
 
-                      // 使用Bmob登录
-                      Bmob.User.logIn(nickName, userData.openid, {
-                        // 登录成功的回调
-                        success:function(user) {
-                          console.log(user);
-                          try {
-                            // 本地保存登录信息
-                            wx.setStorageSync("user_openid", user.get('userData').openid);
-                            wx.setStorageSync("user_id", user.id);
-                            wx.setStorageSync("my_nick", user.get("nickname"));
-                            wx.setStorageSync("my_username", user.get("username"));
-                            wx.setStorageSync("my_sex", user.get("sex"));
-                            wx.setStorageSync("my_avatar", user.get("userPic"));
-                          } catch(e) {
-                            console.log(e);
-                          }
-                          console.log("login successfully");
-                        },
-                        // 登录失败的回调
-                        error:function(user, error) {
-                          if(error.code == '101') {
-                            // 开始注册
-                            var user = new Bmob.User();
-                            user.set('username',nickName);
-                            user.set('password',userData.openid);
-                            user.set('nickname',nickName);
-                            user.set('userPic', avatarUrl);
-                            user.set('userData', userData);
-                            user.set('sex', sex);
-                            user.set('feednum', 0);
-                            user.signUp(null, {
-                              // 注册成功
-                              success:function(result) {
-                                console.log("register successfully");
-                                try {
-                                  wx.setStorageSync("user_openid", user.get('userData').openid);
-                                  wx.setStorageSync("user_id", user.id);
-                                  wx.setStorageSync("my_nick", user.get("nickname"));
-                                  wx.setStorageSync("my_username", user.get("username"));
-                                  wx.setStorageSync("my_sex", user.get("sex"));
-                                  wx.setStorageSync("my_avatar", user.get("userPic"));
-                                } catch(e) {
-                                  console.log(e);
-                                }
-                              },
-                              // 注册失败
-                              error:function(userData, error) {
-                                console.log("openid=" + userData);
-                                console.log(error);
-                              }
-                            }); //注册块的结束
-
-
-                          } 
-
-                        }
-                      }); //登录块的结束
-                    },
-                  });
-                },
-
-                error: function (error) {
-                  console.log("ERROR:" + error.code + " " + error.message);
-                }
-              });
+              })
             } else {
               console.log("获取用户登录状态失败"+ res.errMsg);
             }
           },
           complete:function(e) {
-            console.log("获取用户登录成功" + e);
+            console.log("获取用户登录成功" + e.toString());
           }
         });
       }
@@ -188,7 +117,5 @@ App({
   },
   onError:function(msg) {
 
-  },
-  // Touches:new Touches(),
-  util:_utils,
+  }
 })
