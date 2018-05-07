@@ -1,7 +1,7 @@
 (function() {
 
   var service = {};
-  const baseUrl = "https://www.sysuygm.cn";
+  const baseUrl = "https://nermpswq.qcloud.la";
   // 中大学生邮箱的尾缀
   const emailPostfix = "@mail2.sysu.edu.cn";
   const userId = "12344"
@@ -10,33 +10,37 @@
   @param filePaths 待传图片的本地路径
   @param callback 回调函数
   */
-  service.postProduct = function (productForm, filePaths, callback) {
-      return callback({
-          success: true
+
+  function uploadDIY(filePaths, index, length, productForm, successUp, failUp) {
+      wx.uploadFile({
+        url: baseUrl + "/publish",
+        filePath: filePaths[index],
+        name: "ppp",
+        formData: productForm,
+        header: {
+              "Content-Type": "multipart/form-data",
+              'accept': 'application/json',
+          },
+          success:function(res) {
+              successUp++;
+              console.log(res.data)
+          },
+          fail:function(err) {
+              failUp++;
+          },
+          complete:function() {
+              index++;
+              if(index == length) return;
+              else {
+                  uploadDIY(filePaths, index, length, productForm, successUp, failUp);
+              }
+          }
       });
-    wx.uploadFile({
-      url: baseUrl + "/publish",
-      filePath: filePaths,
-      name:'......',
-      header: {
-        "Content-Type": "multipart/form-data",
-        'accept': 'application/json',
-        'Authorization': 'sysu ..'    //若有token，此处换上你的token，没有的话省略  
-      },
-      formData:productForm,
-      success:function(res) {
-        return callback({
-            success:true
-        });
-        console.log(JSON.stringify(res.data))  
-      },
-      fail:function(err) {
-        callback(err);
-      },
-      complete:function(res) {
-        console.log('complete postProduct');
-      }
-    })
+  }
+  service.postProduct = function (productForm, filePaths) {
+      var length = filePaths.length;
+      var index = 0, successUp = 0, failUp = 0;
+      uploadDIY(filePaths, index, length, productForm, successUp, failUp);
   }
   /* 获取商品列表
   @param which 按最新、最热，或者其他分类

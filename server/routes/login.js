@@ -36,7 +36,6 @@ function sha1(message) {
 
 route.get('/login', function(req, res, next) {
     var code = req.query.code;
-    var cookies = req.cookies;
     var curTime = moment().format("YYYY-MM-DD HH:mm:ss");
     // 向微信服务器请求sesion_key
     request.get({
@@ -55,8 +54,7 @@ route.get('/login', function(req, res, next) {
             var skey = sha1(sessionKey);
             var data = {
                 lastTime:curTime,
-                curTime:curTime,
-                cookies:cookies
+                curTime:curTime
             }
             var sessionData = { 
                 session_id:skey,
@@ -66,7 +64,7 @@ route.get('/login', function(req, res, next) {
             sessionStore.set(skey,sessionData, function (err) {
                 if(err) console.log(err)
               })
-            res.json({session_data:sessionData})
+            res.json({session_data:sessionData, openid:openId})
         } else {
             res.json(err)
         }

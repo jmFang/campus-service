@@ -20,41 +20,68 @@ App({
       },
     })
 
+    // try {
+    //     var userId = wx.getStorageSync('user_id');
+    //     if(userId) {
+    //         console.log('user has registered.')
+    //     } else {
+    //         wx.login({
+    //             success:function(res) {
+    //                 wx.request({
+    //                     url: 'https://nermpswq.qcloud.la/register',
+    //                     data: {
+    //                         code:res.code
+    //                     },
+    //                     method:'GET',
+    //                     success:function(res) {
+    //                         wx.setStorageSync('user_id', res.data.user_id);                   
+    //                     },
+    //                     fail:function(err) {
+    //                         console.log("获取用户ID失败");
+    //                     }
+    //                 })
+    //             }
+    //         })
+    //     }
+    // } catch(e) {
+    //     console.log("获取用户ID失败:" + e)
+    // }
+
     // 调用系统API从本地缓存中获取数据
     try {
-      var value = wx.getStorageSync("session_id");
-      if(value) {
-        console.log("session_id",value)
-      } else {
-        wx.login({
-          success:function(res) {
-            if(res.code) {
-              console.log("res.code",res.code)
-              wx.request({
-                  url: 'https://nermpswq.qcloud.la/login',
-                  data:{
-                      code:res.code
-                  },
-                  method:"GET",
-                  success:function(res) {
-                      console.log(res)
-                      var session_data = res.data.session_data;
-                      var session_id = session_data.session_id;
-                      var expires = session_data.expires;
-                      var data = session_data.data;
-                      wx.setStorageSync('session_id', session_id)
-                  }
+        var value = wx.getStorageSync("session_id");
+        if(value) {
+            console.log("session_id",value)
+        } else {
+            wx.login({
+            success:function(res) {
+                if(res.code) {
+                console.log("res.code",res.code)
+                // wx.request({
+                //     url: 'https://nermpswq.qcloud.la/login',
+                //     data:{
+                //         code:res.code
+                //     },
+                //     method:"GET",
+                //     success:function(res) {
+                //         console.log(res)
+                //         var session_data = res.data.session_data;
+                //         var session_id = session_data.session_id;
+                //         var expires = session_data.expires;
+                //         var data = session_data.data;
+                //         wx.setStorageSync('session_id', session_id)
+                //     }
 
-              })
-            } else {
-              console.log("获取用户登录状态失败"+ res.errMsg);
+                // })
+                } else {
+                    console.log("获取用户登录状态失败"+ res.errMsg);
+                }
+            },
+            complete:function(e) {
+                console.log("获取用户登录成功" + e.toString());
             }
-          },
-          complete:function(e) {
-            console.log("获取用户登录成功" + e.toString());
-          }
-        });
-      }
+            });
+        }
     } catch(e) {
       console.log(e + " " + 登录失败);
     }
@@ -95,16 +122,17 @@ App({
     if(this.globalData.userInfo) {
       typeof cb == "function" && cb(this.globalData.userInfo);
     } else {
-      wx.login({
-        success:function() {
-          wx.getUserInfo({
-            success:function(res) {
-              that.globalData.userInfo = res.userInfo;
-              typeof cb == "function" && cb(that.globalData.userInfo);
+        wx.login({
+            success:function() {
+            wx.getUserInfo({
+                success:function(res) {
+                that.globalData.userInfo = res.userInfo;
+                typeof cb == "function" && cb(that.globalData.userInfo);
+                console.log("获取用户信息成功");
+                }
+            });
             }
-          });
-        }
-      });
+        });
     }
   },
 

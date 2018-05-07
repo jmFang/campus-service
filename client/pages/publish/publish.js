@@ -72,7 +72,6 @@ Page({
     var that = this;
     var value = e.detail.value;
     var productForm = {};
-    productForm.value = e.detail.value;
     productForm.title = value.title; //商品标题
     productForm.description = value.description; //商品描述
     productForm.originPrice = value.originPrice; //商品原价
@@ -81,11 +80,15 @@ Page({
     productForm.productType = that.data.productType;//商品类型
     productForm.visits = 0; //浏览次数
     productForm.comments = 0; //评论次数
-    var filePaths = this.data.files+"";
+    var photoPaths = this.data.files;
 
-    service.postProduct(productForm, filePaths, function(res){
-        console.log(res.success);
-    });
+    service.postProduct(productForm, photoPaths);
+    setTimeout(function(){
+        wx.navigateBack({
+
+        })
+    }, 500);
+
   },
 
   /**
