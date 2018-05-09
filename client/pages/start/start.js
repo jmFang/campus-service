@@ -20,12 +20,17 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    app.getUserInfo(function (userinfo) {
-      that.setData({
-        userInfo: userinfo,
-      });
-      console.log(userinfo);
+    app.checkLogin(function() {
+        console.log("in start page");
     });
+    wx.getUserInfo({
+        success:function(res) {
+            var info = res.userInfo;
+            that.setData({
+                userInfo: info,
+            }); 
+        }
+    })
   },
 
   /**
@@ -33,11 +38,11 @@ Page({
    */
   onReady: function () {
     var _this = this;
-    setTimeout(function() {
-      _this.setData({
-        remind:""
-      })
-    }, 1000)
+      setTimeout(function () {
+          _this.setData({
+              remind: ""
+          })
+     }, 1000)
 
     wx.onAccelerometerChange(function(res){
       var angle = -(res.x*30).toFixed(1);
@@ -58,8 +63,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log("loading...");
-    console.log(this.data.userInfo);
   },
   /**
    * 生命周期函数--监听页面隐藏

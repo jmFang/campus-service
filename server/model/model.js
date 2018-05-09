@@ -3,7 +3,7 @@ userSql = "CREATE TABLE IF NOT EXISTS user ( \
             college VARCHAR(40), \
             email VARCHAR(30), \
             phone VARCHAR(20), \
-            avartar VARCHAR(30), \
+            avatar VARCHAR(30), \
             grade INT, \
             wechat VARCHAR(20), \
             qq VARCHAR(15),\
