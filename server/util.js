@@ -57,8 +57,17 @@ var loginCheckMiddleware = function (req, res, next) {
     }, {});
   };
   
+  var timeNormalize = function(expires) {
+      var limit = parseInt(expires);
+      var now = new Date();
+      var days = limit * 30;
+      now.setDate(now.getDate() + days)
+      return moment(now).format("YYYY-MM-DD HH:mm:ss");
+  }
+
   module.exports = {
     mysql: mysql,
     loginCheckMiddleware: loginCheckMiddleware,
-    only:only
+    only:only,
+    timeNormalize:timeNormalize
   };

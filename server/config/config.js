@@ -4,15 +4,19 @@ var config = {
     port:5757,
     expires:24 * 3600,
     sessionTable:"session",
+    userTable:"user",
+    productTable:"product",
+    photoTable:"photo",
+    commentTable:"comment",
     cos:{
-        region:"",
-        fileBucket:""
+        region:"ap-guangzhou",
+        fileBucket:"campus-service-1256014102"
     },
     mysql:{
         host:'localhost',
         port:'3306',
         user:'root',
-        password:'sysuygm1234',
+        password:'root',
         database:'campus_service',  
         charset: 'utf8mb4'
     }

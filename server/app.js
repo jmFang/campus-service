@@ -20,8 +20,8 @@ var port = config.port;
 app.use(bodyParser.json());
 
 app.get('/', indexRouter);
-app.use('/login', loginRouter);
 app.use('/user', userRouter);
+app.use('/login', loginRouter);
 app.use('/publish',publishRouter);
 // app.get('/register',registerRouter);
 

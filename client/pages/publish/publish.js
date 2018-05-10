@@ -1,7 +1,6 @@
 // pages/publish/publish.js
 var app = getApp();
-var which = ""
-var Bmob = require('../../utils/bmob.js');
+var which = "";
 var service = require('../../service/service.api.js');
 Page({
   /**
@@ -72,22 +71,30 @@ Page({
     var that = this;
     var value = e.detail.value;
     var productForm = {};
+    var skey = wx.getStorageSync('skey'); //用户skey
+    var curTime = Date.now().toString();
+    productForm.skey = skey; //用户skey
     productForm.title = value.title; //商品标题
     productForm.description = value.description; //商品描述
     productForm.originPrice = value.originPrice; //商品原价
     productForm.sellingPrice = value.sellingPrice; //商品售价 
-    productForm.timeLimit = that.data.value; //商品下架期限
+    productForm.timeLimit = this.toNum(that.data.value); //商品下架期限
+    productForm.timeUp = Date.now().toString();
     productForm.productType = that.data.productType;//商品类型
     productForm.visits = 0; //浏览次数
-    productForm.comments = 0; //评论次数
+    // productForm.pid = skey + "#" + curTime;  //作为商品的唯一键，同一时刻只会发布一件商品，加上用户是skey，在多用户情况下也是唯一的。
     var photoPaths = this.data.files;
 
-    service.postProduct(productForm, photoPaths);
-    setTimeout(function(){
-        wx.navigateBack({
+    service.postProduct(productForm, photoPaths, function(){
+        wx.showToast({
+            title: '完成!',
+        });
+        setTimeout(function () {
+            wx.navigateBack({
 
-        })
-    }, 500);
+            })
+        }, 1000);
+    });
 
   },
 
@@ -130,6 +137,15 @@ Page({
           pressed1:!that.data.pressed1,
           pressed2:!that.data.pressed2
       })
+  },
+  toNum:function(str) {
+      switch(str){
+          case '1个月':return 1;
+          case '2个月':return 2;
+          case '3个月':return 3;
+          case '半年':return 6;
+          default:return 0;
+      }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

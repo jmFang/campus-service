@@ -1,46 +1,51 @@
-(function() {
+var config = require('../config.js');
 
   var service = {};
-  const baseUrl = "https://nermpswq.qcloud.la";
+  const baseUrl = config.host;
+  var skey = wx.getStorageSync('skey');
+  var header = {
+      "Content-Type": "multipart/form-data",
+      'accept': 'application/json',
+      skey: skey,
+      version: config.apiVersion
+  };
+
   // 中大学生邮箱的尾缀
-  const emailPostfix = "@mail2.sysu.edu.cn";
-  const userId = "12344"
   /*发布商品
   @param product 待发布的商品表单
   @param filePaths 待传图片的本地路径
   @param callback 回调函数
   */
 
-  function uploadDIY(filePaths, index, length, productForm, successUp, failUp) {
+  function uploadDIY(filePaths, index, length, productForm, successUp, failUp, callback) {
       wx.uploadFile({
         url: baseUrl + "/publish",
         filePath: filePaths[index],
-        name: "ppp",
+        name: "product_photo",
         formData: productForm,
-        header: {
-              "Content-Type": "multipart/form-data",
-              'accept': 'application/json',
-          },
-          success:function(res) {
+        header: header,
+        method:"POST",
+        success:function(res) {
               successUp++;
-              console.log(res.data)
+              console.log(res)
           },
           fail:function(err) {
               failUp++;
           },
           complete:function() {
               index++;
-              if(index == length) return;
-              else {
-                  uploadDIY(filePaths, index, length, productForm, successUp, failUp);
+              if(index == length){
+                callback()
+              } else {
+                  uploadDIY(filePaths, index, length, productForm, successUp, failUp, callback);
               }
           }
       });
   }
-  service.postProduct = function (productForm, filePaths) {
+  service.postProduct = function (productForm, filePaths,callback) {
       var length = filePaths.length;
       var index = 0, successUp = 0, failUp = 0;
-      uploadDIY(filePaths, index, length, productForm, successUp, failUp);
+      uploadDIY(filePaths, index, length, productForm, successUp, failUp, callback);
   }
   /* 获取商品列表
   @param which 按最新、最热，或者其他分类
@@ -146,8 +151,4 @@
   service.validateEmail = function(netId, callback) {
 
   }
-
-
   module.exports = service;
-
-})();

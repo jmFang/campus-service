@@ -1,4 +1,4 @@
 module.exports = {
-    host:"https://nermpswq.qcloud.la",
+    host:"http://localhost:5757",
     apiVersion:"v1"
 }
