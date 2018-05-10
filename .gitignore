@@ -1,2 +1,2 @@
 project.config.json
-./server/config/sdk.config.json
+server/config/sdk.config.json
