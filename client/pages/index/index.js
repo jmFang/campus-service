@@ -1,4 +1,5 @@
 const app = getApp()
+var service = require('../../service/service.api.js');
 Page({
   data: {
     slides:[
@@ -123,26 +124,19 @@ Page({
 
   // 数据测试
   onReady:function() {
-    this.setData({
-      productsList:[
-        {
-          title:'雅思词汇',
-          price:'￥88',
-          pictures:[
-            'http://bmob-cdn-17230.b0.upaiyun.com/2018/03/13/c2f5a24a40b460c08068ed08572829d0.jpg',
-            'http://bmob-cdn-17230.b0.upaiyun.com/2018/03/13/6808523e40d1382f8003c8a6067822cb.jpg',
-            'http://bmob-cdn-17230.b0.upaiyun.com/2018/03/13/c2f5a24a40b460c08068ed08572829d0.jpg',
-            'http://bmob-cdn-17230.b0.upaiyun.com/2018/03/13/6808523e40d1382f8003c8a6067822cb.jpg',
-            '',
-            ''
-          ],
-          description:"雅思考试必备资料，低价卖出，欢迎来购雅思考试必备资料，低价卖出，欢迎来购雅思考试必备资料",
-          userAvatarUrl:'http://bmob-cdn-17230.b0.upaiyun.com/2018/03/10/e915e3a840c832b380bb70aa93441506.jpg',
-          userNickname:'大佬',
-          userVerified:'已认证',
-          userAddress:'中山大学'
-        },
-      ]
+    var that = this;
+    service.getProducts("", function(res) {
+        console.log(res.data)
+        var dataArr = res.data;
+        // 增加到3的倍数，使得排列能够每行三张图片
+        dataArr.forEach(function(item) {
+            while(item.photoUrls.length % 3 != 0) {
+                item.photoUrls.push("");
+            }
+        })
+        that.setData({
+            productsList:res.data
+        })
     })
   },
   goToDetails:function(e) {

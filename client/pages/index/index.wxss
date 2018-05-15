@@ -171,7 +171,7 @@ page {
   display: inline-flex;
 }
 .product-pictures image {
-  /* border: 1rpx solid #ddd; */
+   border: 1rpx solid #ddd; 
   margin: 0 5rpx 0 5rpx;
   height: 100px;
   width: 100px;

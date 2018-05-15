@@ -53,10 +53,11 @@ var config = require('../config.js');
   */ 
   service.getProducts = function (which, callback) {
     wx.request({
-      url: baseUrl + "/api/products",
+      url: baseUrl + "/publish",
       method:'GET',
+      header:header,
       success:function(res){
-        callback(res);
+        //callback(res.data);
         console.log("返回成功的数据:" + res.data) //返回的会是对象，可以用JSON转字符串打印出来方便查看数据    
         console.log("返回成功的数据:" + JSON.stringify(res.data)) //这样就可以愉快的看到后台的数据啦 
       },
@@ -64,7 +65,7 @@ var config = require('../config.js');
         callback(fail);
       },
       complete:function(res) {
-        callback(res);
+        callback(res.data);
       }
     })
   }
