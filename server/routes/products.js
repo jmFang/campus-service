@@ -3,6 +3,7 @@ var fs = require('fs');
 var moment = require('moment');
 var multiparty = require('multiparty');
 var CosSdk = require('cos-nodejs-sdk-v5');
+var _ = require('underscore')
 var route = express.Router();
 
 var loginCheckMiddleware = require('../util').loginCheckMiddleware;
@@ -13,6 +14,7 @@ var config = require('../config/config.js');
 var productTable = config.productTable;
 var sessionTable = config.sessionTable;
 var photoTable = config.photoTable;
+var userTable = config.userTable;
 // 获取腾讯云配置
 // serverHost, tunnelServerUrl, tunnelSignatureKey, qcloudAppId, qcloudSecretId, qcloudSecretKey, wxMessageToken
 var qcloudConfig = JSON.parse(fs.readFileSync('./config/sdk.config.json', 'utf8'));
@@ -34,6 +36,66 @@ route.all('*', function (req, res, next) {
     next();
 });
 
+var segProduct = {
+    pid:productTable +".pid",
+    title:productTable +".title",
+    desc:productTable+".desc",
+    uid:productTable+".uid",
+    price:productTable+".s_price"
+}
+var segPhoto = {
+    pid:photoTable +".pid",
+    path:photoTable+".path"
+}
+var segUser = {
+    uid:userTable+".uid",
+    avater:userTable +".avatar"
+}
+route.get('/', function (req, res, next) {
+    mysql.select(segProduct.pid,segProduct.title, segProduct.desc,segProduct.price, segPhoto.path, segUser.avater).from(productTable)
+    .leftJoin(photoTable, segProduct.pid,segPhoto.pid)
+    .leftJoin(userTable, segUser.uid, segProduct.uid)
+    .then(function (result) {
+        console.log("result", result)
+        if(result.length > 0) {
+            var sumProduct = new Set();
+            var map = new Map();
+            var ret = [];
+            _.each(result, function (item) { 
+                var tmp = {
+                    pid:null,
+                    title:null,
+                    desc:null,
+                    photoUrls:[],
+                    avatar:null
+                };
+                if(!map.has(item.pid)) {
+                    tmp.pid = item.pid;
+                    tmp.title = item.title;
+                    tmp.desc = item.desc;
+                    tmp.price = item.s_price;
+                    tmp.photoUrls.push(item.path);
+                    tmp.avatar = item.avatar;
+                    map.set(item.pid, tmp);
+                } else {
+                    map.get(item.pid).photoUrls.push(item.path);
+                }
+            });
+
+            map.forEach(function (value, key) {
+                console.log("key", key);
+                console.log("value", value);
+                ret.push(value);
+            });
+            console.log("ret", ret);
+            res.json({
+                data:ret,
+                count:map.size,
+                status:"ok"
+            }) 
+        }
+      })
+  })
 route.post('/', function(req, res, next) {
    
     var form = new multiparty.Form({
